@@ -6,13 +6,14 @@ module.exports = (inputs, args) => {
   }
 
   const { serviceName, functionName, qualifier, target, scheduledActions, targetTrackingPolicies } = args;
-  
-  if (serviceName) {
-    setObj(inputs, '--service-name', serviceName);
+  const names = getPropsName(inputs.props);
+
+  if (serviceName || names.service) {
+    setObj(inputs, '--service-name', serviceName || names.service);
   }
 
-  if (functionName) {
-    setObj(inputs, '--function-name', functionName);
+  if (functionName || names.function) {
+    setObj(inputs, '--function-name', functionName || names.function);
   }
 
   if (qualifier) {
@@ -32,6 +33,21 @@ module.exports = (inputs, args) => {
   }
 
   return inputs;
+}
+
+function getPropsName(props) {
+  if (!isObject(props)) {
+    return {};
+  }
+
+  const names = {};
+  if (isObject(props.service)) {
+    names.service = props.service.name;
+  }
+  if (isObject(props.function)) {
+    names.function = props.function.name;
+  }
+  return names;
 }
 
 function setObj(inputs, key, value) {

@@ -5,8 +5,8 @@ actions:
   pre-provision:
     - plugin: provision-fc
       args:
-        serviceName: test-wss
-        functionName: start-fc-event-nodejs14
+        serviceName: test-wss # 不填写则使用组件配置的 serviceName
+        functionName: start-fc-event-nodejs14 # 不填写则使用组件配置的 functionName
         qualifier: pre
         target: 1
         scheduledActions:

@@ -15,8 +15,8 @@ services:
       pre-provision:
         - plugin: ${path(..)}
           args:
-            serviceName: test-wss
-            functionName: start-fc-event-nodejs14
+            # serviceName: test-wss
+            # functionName: start-fc-event-nodejs14
             qualifier: pre
             target: 1
             scheduledActions:
